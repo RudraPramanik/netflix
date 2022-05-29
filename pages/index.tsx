@@ -7,6 +7,9 @@ import requests from '../utils/requist'
 import { Movie } from '../typing'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
+import { useRecoilValue } from 'recoil'
+import { modalState } from '../Atom/modelAtom'
+import Modal from '../components/Modal'
 
 interface props {
   netflixOriginals: Movie[]
@@ -32,6 +35,7 @@ const Home = ({
 }: // products,
 props) => {
   const { user, loading } = useAuth()
+  const showModal = useRecoilValue(modalState)
 
   if (loading) return null
 
@@ -59,6 +63,7 @@ props) => {
         </section>
         {/* module */}
       </main>
+      {showModal && <Modal />}
     </div>
   )
 }
